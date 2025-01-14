@@ -1,0 +1,48 @@
+/* Import Fonts & All CSS */
+@import 'fonts/aileron-font-style.css';
+@import 'css/bootstrap.min.css';
+@import 'css/animate.css';
+@import 'css/default-assets/classy-nav.css';
+@import 'css/owl.carousel.min.css';
+@import 'css/magnific-popup.css';
+@import 'css/font-awesome.min.css';
+@import 'css/style.css';
+
+// **************
+// Utilities
+// **************
+@import "utilities/fonts";
+@import "utilities/variables";
+@import "utilities/responsive";
+@import "utilities/color";
+
+// *************
+// Mixins
+// *************
+
+@import "mixins/flex";
+@import "mixins/miscellaneous";
+
+// **************
+// Stylesheet
+// *************
+@import "reboot";
+@import "spacing";
+@import "preloader";
+@import "heading";
+@import "backtotop";
+@import "buttons";
+@import "header";
+@import "hero";
+@import "portfolio";
+@import "testimonial";
+@import "newsletter";
+@import "about";
+@import "service";
+@import "breadcrumb";
+@import "blog";
+@import "cta";
+@import "cfa";
+@import "team";
+@import "footer";
+@import "contact";
