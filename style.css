@@ -2739,3 +2739,11 @@ input:focus {
   opacity: 1;
   visibility: visible;
 }
+
+.hide-content {
+  display: none;
+}
+
+.font-sz-16 {
+  font-size: 16px;
+}
