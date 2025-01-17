@@ -1748,8 +1748,9 @@ input:focus {
 }
 .single-service-area .service-icon {
   background-color: #e7f2fd;
-  width: 145px;
-  height: 110px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  /* height: 110px; */
   font-size: 42px;
   color: #303030;
   text-align: center;
