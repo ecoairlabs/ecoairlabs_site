@@ -930,6 +930,7 @@ input:focus {
   position: absolute;
   top: 35px;
   left: 16px;
+  right: 16px;
   font-size: 24px;
   z-index: 2;
   background-color: #e7f2fd;
@@ -1471,6 +1472,10 @@ input:focus {
   background-color: #303030;
 }
 
+.report-area {
+  padding-inline-end: 60px;
+}
+
 /* :: 12.0 About CSS */
 .about-us-content {
   position: relative;
@@ -1583,6 +1588,24 @@ input:focus {
 
 .uza-about-us-area_img {
   border-radius: 10px;
+}
+
+.certified-img {
+  max-width: 33vh;
+  max-height: 27vh;
+}
+
+.contact-image-container {  
+  overflow: hidden; 
+  position: relative; 
+  padding-block-end: 80px;
+  
+}
+
+.contact-image-container img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
 }
 
 .uza-video-area .video-play-btn {
