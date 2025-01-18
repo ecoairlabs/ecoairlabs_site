@@ -1306,11 +1306,12 @@ input:focus {
   margin-right: 60px;
 }
 .single-testimonial-slide .testimonial-thumbnail img {
-  border-radius: 50%;
+  border-radius: 10%;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .single-testimonial-slide .testimonial-thumbnail {
-    margin-right: 30px;
+    margin-right: 30px;    
+    margin-left: 10px;
   }
 }
 @media only screen and (max-width: 767px) {
