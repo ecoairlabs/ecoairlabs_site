@@ -89,7 +89,9 @@
       content="/img/favicon/ms-icon-144x144.png"
     />
     <meta name="theme-color" content="#ffffff" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    
   </head>
 
   <body>
@@ -1394,28 +1396,24 @@
                       />
                     </div>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <select
-                        class="form-control mb-30"
+                  <div class="col-lg-6" >
+                    <div>
+                      <select id="custom-select"
+                        class="form-control mb-30 custom-select"
                         name="location"
-                        placeholder="Location"
                         required
                       >
-                        <option value="location-1">Nashville TN area</option>
-                        <option value="location-2">
-                          Bowling Green KY area
-                        </option>
-                        <option value="location-3">
-                          Kansas city MO/KS area
-                        </option>
+                      <option></option>
+                      <option value="location-1">Nashville TN area</option>
+                      <option value="location-2">Bowling Green KY area</option>
+                      <option value="location-3">Kansas city MO/KS area</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="form-group">
                       <textarea
-                        class="form-control mb-30"
+                        class="form-control mb-30 mt-30"
                         name="message"
                         rows="8"
                         cols="80"
@@ -1579,5 +1577,8 @@
     <script src="js/uza.bundle.js"></script>
     <!-- Active js -->
     <script src="js/default-assets/active.js"></script>
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
