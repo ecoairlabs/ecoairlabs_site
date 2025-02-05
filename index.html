@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90RC7FRH3Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-90RC7FRH3Z');
+    </script>
     <meta charset="UTF-8" />
     <meta
       name="description"
@@ -166,7 +175,7 @@
 
                 <!-- Get A Quote -->
                 <div class="get-a-quote ml-4 mr-3">
-                  <a href="#" class="btn uza-btn">Get A Quote</a>
+                  <a href="#" id="quoteOpenPopup" class="btn uza-btn quoteOpenPopup">Get A Quote</a>
                 </div>
               </div>
             </div>
@@ -1351,7 +1360,116 @@
                   will get in touch with you.
                 </h4>
               </div>
-              <form action="#" method="post">
+              <div id="quoteFormContainer">
+                <form action="./src/server.php" method="post" id="quoteForm">
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <input type="text" class="form-control mb-30" name="full_name" 
+                                     placeholder="Name" required>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <input type="email" class="form-control mb-30" name="email" 
+                                     placeholder="Email" required>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <input type="tel" class="form-control mb-30" name="phone" 
+                                     placeholder="Phone" pattern="^[+]?[0-9\s\-\(\)]{7,}$" required>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <input type="text" class="form-control mb-30" name="organization" 
+                                     placeholder="Organization">
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <select class="form-control mb-30 custom-select" name="location" required>
+                                  <option value="" selected disabled>Select Location</option>
+                                  <option value="Nashville TN area">Nashville TN area</option>
+                                  <option value="Bowling Green KY area">Bowling Green KY area</option>
+                                  <option value="Kansas city MO/KS area">Kansas city MO/KS area</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <textarea class="form-control mb-30 mt-30" name="message" rows="8" 
+                                        placeholder="Message" required></textarea>
+                          </div>
+                      </div>
+                      
+                      <!-- Добавленные элементы -->
+                      <div class="col-12">
+                          <div class="g-recaptcha mb-30" 
+                               data-sitekey="6LfdcsoqAAAAAIT0WYVhexoSxMGYHPh4ftY3-VOA"></div>
+                      </div>
+                      
+                      <div class="col-12 d-flex">
+                          <input type="hidden" name="form_type" value="quote_form">
+                          <button type="submit" class="btn uza-btn btn-3 mt-15">Send</button>
+                      
+                      </div>
+                  </div>
+              </form>
+              
+              <!-- Подключение reCAPTCHA -->
+              <script src="https://www.google.com/recaptcha/api.js"></script>
+                <!-- <form action="#" method="post" id="quoteForm">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control mb-30" name="full-name" placeholder="Name" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <input type="email" class="form-control mb-30" name="email" placeholder="Email" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control mb-30" name="phone" placeholder="Phone" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control mb-30" name="organization" placeholder="Organization" />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <select id="custom-select" class="form-control mb-30 custom-select" name="location" required>
+                          <option value="" selected disabled>Select Location</option>
+                          <option value="location-1">Nashville TN area</option>
+                          <option value="location-2">Bowling Green KY area</option>
+                          <option value="location-3">Kansas city MO/KS area</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <textarea class="form-control mb-30 mt-30" name="message" rows="8" placeholder="Message"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-12 d-flex quoteButtonsOnPopup">
+                  
+                      <button type="submit" class="btn uza-btn btn-3 mt-15">Send</button>
+                   
+                       <button type="button" id="quoteClosePopup" class="btn uza-btn btn-3 mt-15">Close</button>
+                    </div>
+                  </div>
+                </form> -->
+              </div>
+              
+              <!-- Pop-up (изначально скрыт) -->
+              
+              <!-- <form action="#" method="post" id="orderForm">
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="form-group">
@@ -1398,12 +1516,13 @@
                   </div>
                   <div class="col-lg-6" >
                     <div>
-                      <select id="custom-select"
+                      <select
+                        id="custom-select"
                         class="form-control mb-30 custom-select"
                         name="location"
                         required
                       >
-                      <option></option>
+                      <option value="" selected disabled></option>
                       <option value="location-1">Nashville TN area</option>
                       <option value="location-2">Bowling Green KY area</option>
                       <option value="location-3">Kansas city MO/KS area</option>
@@ -1422,10 +1541,12 @@
                     </div>
                   </div>
                   <div class="col-12">
-                    <button class="btn uza-btn btn-3 mt-15">Send</button>
+                    <button type="submit" class="btn uza-btn btn-3 mt-15">Send</button>
                   </div>
                 </div>
-              </form>
+              </form> -->
+              
+
             </div>
           </div>
 
@@ -1566,6 +1687,81 @@
     </footer>
     <!-- ***** Footer Area End ***** -->
 
+    <div id="quotePopupOverlay">
+      <div id="quotePopupContainer">
+        <!-- <button id="quoteClosePopup" class="btn-close">X</button> -->
+        <!-- Сюда переместится форма -->
+      </div>
+    </div>
+
+    <div id="popupMessage" class="popup">
+      <div class="popup-content">
+        <h6></h6>
+        <p></p>
+        <button id="closePopup" class="btn uza-btn btn-3">Close</button>
+      </div>
+    </div>
+
+    <template id="quoteFormTemplate">
+      <form action="./src/server.php" method="post" id="quoteForm-t">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input type="text" class="form-control mb-30" name="full_name" 
+                     placeholder="Name" required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input type="email" class="form-control mb-30" name="email" 
+                     placeholder="Email" required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input type="tel" class="form-control mb-30" name="phone" 
+                     placeholder="Phone" pattern="^[+]?[0-9\s\-\(\)]{7,}$" required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <input type="text" class="form-control mb-30" name="organization" 
+                     placeholder="Organization">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <select class="form-control mb-30 custom-select" name="location" required>
+                <option value="" selected disabled>Select Location</option>
+                <option value="Nashville TN area">Nashville TN area</option>
+                <option value="Bowling Green KY area">Bowling Green KY area</option>
+                <option value="Kansas city MO/KS area">Kansas city MO/KS area</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <textarea class="form-control mb-30 mt-30" name="message" rows="8" 
+                        placeholder="Message" required></textarea>
+            </div>
+          </div>
+          
+          <!-- reCAPTCHA -->
+          <div class="col-12">
+            <div class="g-recaptcha mb-30" 
+                 data-sitekey="6LfdcsoqAAAAAIT0WYVhexoSxMGYHPh4ftY3-VOA"></div>
+          </div>
+          
+          <div class="col-12 d-flex quoteButtonsOnPopup">
+            <input type="hidden" name="form_type" value="quote_form">
+            <button type="submit" class="btn uza-btn btn-3 mt-15">Send</button>
+            <button type="button" id="quoteClosePopup" 
+                    class="btn uza-btn btn-3 mt-15">Close</button>
+          </div>
+        </div>
+      </form>
+    </template>
+
     <!-- ******* All JS Files ******* -->
     <!-- jQuery js -->
     <script src="js/jquery.min.js"></script>
@@ -1580,5 +1776,7 @@
     <!-- Select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="js/main.js"></script>
+    <!-- Подключение reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
   </body>
 </html>

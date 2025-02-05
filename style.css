@@ -2793,6 +2793,15 @@ input:focus {
   height: 50px;
  }
 
+.select2-container .select2-selection:focus-visible {
+  outline: none;
+}
+
+.select2-container .select2-selection:focus {
+  box-shadow: none;
+  border-color: #1583e9;  
+}
+
 .select2-container .select2-results__option {
   font-size: 14px; /* Размер текста */
   padding: 10px 18px; /*Отступы между элементами */
@@ -2822,4 +2831,115 @@ input:focus {
   height: 0;
 }
 
+#popupMessage {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark background */
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Above everything else */
+}
 
+#popupMessage .popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  width: min(80%, 500px);
+  height: min(50%, 35vh);
+  border-radius: 30px;
+  border: 1px solid #ced4da;
+  text-align: center;
+  position: relative;
+  z-index: 10000;
+}
+
+@media (width < 767px) {
+  #popupMessage .popup-content {
+    width: min(80%, 500px);
+    height: min(50%, 35vh);  
+  }
+}
+@media (767px < width < 1199px) {
+  #popupMessage .popup-content {
+    width: min(80%, 500px);
+    height: min(50%, 25vh);  
+  }
+}
+
+@media (orientation: landscape) and (width < 1024px) {
+  #popupMessage .popup-content {
+    width: min(80%, 500px);
+    height: min(70%, 80vh);  
+  }
+}
+
+
+#closePopup {
+  cursor: pointer;
+}
+
+/* Затемнённый фон pop-up */
+#quotePopupOverlay {
+  display: none; /* Скрыт по умолчанию */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный чёрный фон */
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+#quotePopupOverlay .form-control {
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: 30px;
+  color: #a6a6a6;
+  font-size: 14px;
+}
+
+#quotePopupOverlay .form-control:focus {
+  box-shadow: none;
+  border-color: #1583e9;
+}
+
+#quotePopupOverlay textarea.form-control {
+  height: 110px;
+  padding: 20px;
+  margin-top: 14px;
+  margin-bottom: 30px;
+}
+
+/* Контейнер pop-up */
+#quotePopupContainer {
+  background: #fff;
+  padding: 20px;
+  border-radius: 30px;
+  border: 1px solid #ced4da;
+  width: min(80%, 600px);
+  /* text-align: center; */
+  position: relative;
+}
+
+/* Кнопка закрытия */
+#quoteClosePopup {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.quoteButtonsOnPopup {
+  display: flex;
+  justify-content: space-around;
+}

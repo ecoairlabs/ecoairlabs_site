@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90RC7FRH3Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-90RC7FRH3Z');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="description" content="uza - Model Agency HTML5 Template">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,6 +96,7 @@
   />
   <meta name="theme-color" content="#ffffff" />
     <!-- Core Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -167,7 +178,7 @@
   
                   <!-- Get A Quote -->
                   <div class="get-a-quote ml-4 mr-3">
-                    <a href="#" class="btn uza-btn">Get A Quote</a>
+                    <a href="#" id="quoteOpenPopup" class="btn uza-btn quoteOpenPopup">Get A Quote</a>
                   </div>
                 </div>
               </div>
@@ -510,6 +521,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!-- ***** Footer Area End ***** -->
 
+    <div id="quotePopupOverlay">
+        <div id="quotePopupContainer">
+          <!-- Сюда переместится форма -->
+        </div>
+      </div>
+  
+    <div id="popupMessage" class="popup">
+        <div class="popup-content">
+          <h6></h6>
+          <p></p>
+          <button id="closePopup" class="btn uza-btn btn-3">Close</button>
+        </div>
+    </div>
+
     <!-- ******* All JS Files ******* -->
     <!-- jQuery js -->
     <script src="js/jquery.min.js"></script>
@@ -521,6 +546,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/uza.bundle.js"></script>
     <!-- Active js -->
     <script src="js/default-assets/active.js"></script>
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- main JS file -->
+    <script src="js/main.js"></script>
+    <!-- Подключение reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 
 </body>
 
