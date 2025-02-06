@@ -2861,6 +2861,18 @@ input:focus {
   z-index: 10000;
 }
 
+@media (width < 500px) {
+  .uza-btn {
+    width: 45%;
+    min-width: 100px;
+    
+  }
+  .g-recaptcha {
+    transform: scale(0.77);
+    transform-origin: 0 0;
+  }
+}
+
 @media (width < 767px) {
   #popupMessage .popup-content {
     width: min(80%, 500px);
@@ -2931,6 +2943,15 @@ input:focus {
   width: min(80%, 600px);
   /* text-align: center; */
   position: relative;
+}
+
+@media (orientation: landscape) and (height < 620px) {
+  #quotePopupContainer {
+    height: 90%;
+    overflow-y: auto;
+  
+  }
+
 }
 
 /* Кнопка закрытия */

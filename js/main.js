@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         quotePopupContainer.innerHTML = ""; // Очищаем контейнер
         quotePopupContainer.appendChild(formClone); // Вставляем форму
         quotePopupOverlay.style.display = "flex"; // Показываем popup
+        document.body.style.overflow = "hidden";
         const recaptchaElement = quotePopupContainer.querySelector(".g-recaptcha");
         if (recaptchaElement) {
           grecaptcha.render(recaptchaElement, {
