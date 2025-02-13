@@ -68,8 +68,25 @@ img {
   color: #565656;
   display: inline-block;
   margin-right: 5px;
-  padding-inline-start: 20px;
   max-width: 20vw;
+}
+
+@media only screen and (max-width: 767px) {
+  .classy-navbar .nav-brand {
+    max-width: 30vw;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .classy-navbar .nav-brand {
+    max-width: 40vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .classy-navbar .nav-brand {
+    max-width: 60vw;
+  }
 }
 
 .classy-navbar .nav-brand:focus, .classy-navbar .nav-brand:hover {
