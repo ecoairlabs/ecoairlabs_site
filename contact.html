@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-90RC7FRH3Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90RC7FRH3Z');
+  </script>
+  
     <meta charset="UTF-8">
     <meta name="description" content="uza - Model Agency HTML5 Template">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,6 +96,7 @@
   />
   <meta name="theme-color" content="#ffffff" />
     <!-- Core Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -167,7 +178,7 @@
   
                   <!-- Get A Quote -->
                   <div class="get-a-quote ml-4 mr-3">
-                    <a href="#" class="btn uza-btn">Get A Quote</a>
+                    <a href="#" id="quoteOpenPopup"class="btn uza-btn quoteOpenPopup">Get A Quote</a>
                   </div>
                 </div>
               </div>
@@ -212,38 +223,53 @@
                         <div class="contact-heading mb-50">
                             <h4>Thank you for your interest. <br>Please fill out the form below to inquire about our work in Digital.</h4>
                         </div>
-                        <form action="#" method="post">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control mb-30" name="full-name" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control mb-30" name="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control mb-30" name="full-name" placeholder="Phone">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control mb-30" name="email" placeholder="Organization">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control mb-30" name="message" rows="8" cols="80" placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn uza-btn btn-3 mt-15">Contact Us</button>
-                                </div>
-                            </div>
-                        </form>
+                        <form action="./src/server.php" method="post" id="contactForm">
+                          <div class="row">
+                              <!-- Исправленные поля -->
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control mb-30" name="full_name" 
+                                             placeholder="Name" required>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                      <input type="email" class="form-control mb-30" name="email" 
+                                             placeholder="Email" required>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                      <input type="tel" class="form-control mb-30" name="phone" 
+                                             placeholder="Phone" pattern="^[+]?[0-9\s\-\(\)]{7,}$" required>
+                                  </div>
+                              </div>
+                              <div class="col-lg-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control mb-30" name="organization" 
+                                             placeholder="Organization">
+                                  </div>
+                              </div>
+                              
+                              <div class="col-12">
+                                  <div class="form-group">
+                                      <textarea class="form-control mb-30" name="message" rows="8" 
+                                                placeholder="Message" required></textarea>
+                                  </div>
+                              </div>
+                              
+                              <!-- Добавленные элементы -->
+                              <div class="col-12">
+                                  <div class="g-recaptcha mb-30" 
+                                       data-sitekey="6LfdcsoqAAAAAIT0WYVhexoSxMGYHPh4ftY3-VOA"></div>
+                              </div>
+                              
+                              <div class="col-12">
+                                  <input type="hidden" name="form_type" value="contact_form">
+                                  <button type="submit" class="btn uza-btn btn-3 mt-15">Contact Us</button>
+                              </div>
+                          </div>
+                      </form>
                     </div>
                 </div>
 
@@ -443,6 +469,20 @@
     </footer>
     <!-- ***** Footer Area End ***** -->
 
+    <div id="quotePopupOverlay">
+      <div id="quotePopupContainer">
+        <!-- Сюда переместится форма -->
+      </div>
+    </div>
+
+    <div id="popupMessage" class="popup">
+      <div class="popup-content">
+        <h6></h6>
+        <p></p>
+        <button id="closePopup" class="btn uza-btn btn-3">Close</button>
+      </div>
+    </div>
+
     <!-- ******* All JS Files ******* -->
     <!-- jQuery js -->
     <script src="js/jquery.min.js"></script>
@@ -454,6 +494,12 @@
     <script src="js/uza.bundle.js"></script>
     <!-- Active js -->
     <script src="js/default-assets/active.js"></script>
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- main JS file -->
+    <script src="js/main.js"></script>
+    <!-- Подключение reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 
 </body>
 
