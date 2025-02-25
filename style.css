@@ -1747,16 +1747,16 @@ input:focus {
   position: relative;
   z-index: 1;
 }
+
+.uza-why-choose-us-area_span {
+  color: #1583e9;
+  font-weight: 700;
+}
+
 .uza-why-choose-us-area ul li {
   font-size: 16px;
   margin-bottom: 15px;
   color: #707070;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 .uza-why-choose-us-area ul li i {
   color: #1583e9;
@@ -2372,8 +2372,12 @@ input:focus {
 .post-catagories {
   position: relative;
   z-index: 1;
-  margin: 50px 0;
+  margin-inline: 0;
+  margin-block-start: 20px;
+  margin-block-end: 50px;
 }
+
+
 .post-catagories ul li a {
   display: inline-block;
   padding: 8px 20px;
