@@ -15,7 +15,62 @@ function initializeSelect2() {
   }
 };
 
+function initFactWidget() {
+  const storageKey = "randomFact";
+  const timeKey = "factTimestamp";
+  const factDisplay = document.getElementById("facts-widget-content");
+  const updateInterval = 10 * 1000; // 10 секунд
+  const jsonFile = "../facts.json"; // Файл с фактами
+
+  function getRandomFact(facts) {
+      return facts[Math.floor(Math.random() * facts.length)];
+  }
+
+  function loadFact(facts) {
+      let savedFact = localStorage.getItem(storageKey);
+      let savedTime = localStorage.getItem(timeKey);
+
+      if (!savedFact || !savedTime || Date.now() - savedTime > updateInterval) {
+          savedFact = getRandomFact(facts);
+          localStorage.setItem(storageKey, savedFact);
+          localStorage.setItem(timeKey, Date.now());
+      }
+
+      if (factDisplay) {
+          factDisplay.textContent = savedFact;
+      }
+  }
+
+  function updateFact(facts) {
+      const newFact = getRandomFact(facts);
+      localStorage.setItem(storageKey, newFact);
+      localStorage.setItem(timeKey, Date.now());
+      if (factDisplay) {
+          factDisplay.textContent = newFact;
+      }
+  }
+
+  
+  function fetchFacts() {
+      fetch(jsonFile)
+          .then(response => response.json())
+          .then(facts => {
+              if (!Array.isArray(facts) || facts.length === 0) {
+                  console.error("Файл JSON пустой или не содержит массив.");
+                  return;
+              }
+              loadFact(facts);
+              setInterval(() => updateFact(facts), updateInterval);
+          })
+          .catch(error => console.error("Ошибка загрузки JSON:", error));
+  }
+
+  // Загружаем факты из JSON
+  fetchFacts();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  initFactWidget();
   initializeSelect2();
   const popupMessage = document.getElementById("popupMessage");
   const closePopup = document.getElementById("closePopup");
