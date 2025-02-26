@@ -1806,6 +1806,20 @@ input:focus {
   z-index: 1;
   text-align: center;
 }
+
+.single-service-area p {
+  text-align: justify;
+  line-height: 1.7;
+  text-indent: 15px;
+}
+
+.single-service-area p::first-letter {
+font-size: 22px;
+font-weight: 500;
+}
+  
+  
+
 .single-service-area .service-icon {
   background-color: #e7f2fd;
   width: 100%;
@@ -2152,7 +2166,7 @@ input:focus {
 }
 .blog-details-content p {
   font-size: 18px;
-  color: #a6a6a6;
+  color: #353535;
   font-weight: 400;
 }
 @media only screen and (max-width: 767px) {
