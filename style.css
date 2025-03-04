@@ -2987,25 +2987,23 @@ input:focus {
   z-index: 10000;
 }
 
-@media (width < 500px) {
+@media (max-device-width: 500px) and (-webkit-min-device-pixel-ratio: 2){
   .uza-btn {
     width: 45%;
     min-width: 100px;
     
   }
   .g-recaptcha {
-    transform: scale(0.77);
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -o-transform: scale(0.7);
     transform-origin: 0 0;
-  }
+}
 }
 
-@media (width < 767px) {
-  #popupMessage .popup-content {
-    width: min(80%, 500px);
-    height: min(50%, 35vh);  
-  }
-}
-@media (767px < width < 1199px) {
+@media (768px <= width < 1199px) {
   #popupMessage .popup-content {
     width: min(80%, 500px);
     height: min(50%, 25vh);  
@@ -3060,6 +3058,7 @@ input:focus {
   margin-bottom: 30px;
 }
 
+
 /* Контейнер pop-up */
 #quotePopupContainer {
   background: #fff;
@@ -3071,14 +3070,57 @@ input:focus {
   position: relative;
 }
 
-@media (orientation: landscape) and (height < 620px) {
+@media screen and (orientation: landscape) and (max-height: 619px) {
   #quotePopupContainer {
     height: 90%;
     overflow-y: auto;
-  
   }
-
 }
+
+/* Для Safari (особенно iOS) */
+@supports (-webkit-touch-callout: none) {
+  @media screen and (orientation: landscape) and (max-height: 619px) {
+    #quotePopupContainer {
+      height: 90vh;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
+
+@media (max-device-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+  #popupMessage .popup-content {
+    width: min(80%, 500px);
+    height: min(50%, 35vh); 
+  }
+  #quotePopupContainer {
+    padding: 20px 15px;
+  }
+  #quotePopupOverlay .form-control {
+    height: 35px;
+    margin-bottom: 15px; 
+    font-size: 16px;
+  }
+  #quotePopupOverlay .form-group {
+    margin-bottom: 0px; 
+  }
+  #quotePopupOverlay textarea.form-control {
+    height: 90px;
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  #quotePopupOverlay .select2-container .select2-selection {
+    height: 35px;
+    font-size: 16px;
+  }
+  #quotePopupOverlay .select2-container .select2-selection__arrow {
+    top: 15%;
+  }
+}
+
+
 
 /* Кнопка закрытия */
 #quoteClosePopup {
@@ -3091,12 +3133,44 @@ input:focus {
   justify-content: space-around;
 }
 
+.single-industrial-picture {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
 .facts-widget{
-  display: flex;
-  flex-direction: column;
-  background-color: #f8f9fa;
+  background-color: #e7f2fd;
   height: 100%;
   padding: 20px;
   border-radius: 30px;
-  border: 1px solid #ced4da;
+  border: 1px solid #1583e9;
+}
+
+@media (width < 768px) {
+  .facts-widget {
+    height: 300px;
+  }
+}
+
+#facts-widget-content {
+  opacity: 0; /* Изначально текст скрыт */
+  transition: opacity 0.5s ease-in-out; /* Плавный переход */
+}
+#facts-widget-content.visible {
+  opacity: 1; /* Текст будет видим */
+}
+
+.facts-widget h4 {
+  text-align: center;
+}
+
+.facts-widget p {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 15px;
+}
+
+.br-30 {
+  border-radius: 30px;
 }

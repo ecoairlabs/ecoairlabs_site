@@ -1,13 +1,9 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // Конфигурация (лучше вынести в отдельный файл)
 const CONFIG = [
@@ -16,14 +12,14 @@ const CONFIG = [
         'quote' => 'quotes@ecoairlabs.com'
     ],
     'smtp' => [
-        'host' => 'smtp.gmail.com',
-        'username' => 'ecoairlabs@gmail.com',
-        'password' => 'aaib hsoa xufq zssv',
-        'port' => 587,
-        'encryption' => PHPMailer::ENCRYPTION_STARTTLS
+        'host' => 'localhost',
+        'username' => 'admin@ecoairlabs.com',
+        'password' => '',//'NSFd?B4?hOsX',
+        'port' => 25,
+        'encryption' => false //PHPMailer::ENCRYPTION_STARTTLS
     ],
     'recaptcha' => [
-        'secret' => '6LfdcsoqAAAAAGw5JxUcvHP1e924BQI6_zgrTQjD',
+        'secret' => '6Lf6AeUqAAAAAAcC-qWMYR8Lo83Hvk0bEyms-V84',
         'verify_url' => 'https://www.google.com/recaptcha/api/siteverify'
     ]
 ];
@@ -39,12 +35,12 @@ class MailService {
     private function configureSMTP(): void {
         $this->mailer->isSMTP();
         $this->mailer->Host = CONFIG['smtp']['host'];
-        $this->mailer->SMTPAuth = true;
-        $this->mailer->Username = CONFIG['smtp']['username'];
-        $this->mailer->Password = CONFIG['smtp']['password'];
-        $this->mailer->SMTPSecure = CONFIG['smtp']['encryption'];
+        $this->mailer->SMTPAuth = false;
+        // $this->mailer->Username = CONFIG['smtp']['username'];
+        // $this->mailer->Password = CONFIG['smtp']['password'];
+        $this->mailer->SMTPSecure = false;//CONFIG['smtp']['encryption'];
         $this->mailer->Port = CONFIG['smtp']['port'];
-    }
+    } 
                          // 
     public function send(string $to, string $subject, string $body, string $replyToEmail, string $replyToName): bool {
         try {
@@ -123,8 +119,6 @@ class FormProcessor {
     }
 
     public function process(): array {
-        error_log("Processing form: " . $this->formType);
-        error_log(print_r($this->data, true));  
         try {
             $this->validate();
             

@@ -14,7 +14,6 @@ function initializeSelect2() {
     return $('<span>' + option.text + '</span>');
   }
 };
-
 function initFactWidget() {
   const storageKey = "randomFact";
   const timeKey = "factTimestamp";
@@ -26,31 +25,42 @@ function initFactWidget() {
       return facts[Math.floor(Math.random() * facts.length)];
   }
 
+  function updateLocalStorage(fact) {
+      localStorage.setItem(storageKey, fact);
+      localStorage.setItem(timeKey, Date.now());
+  }
+
   function loadFact(facts) {
       let savedFact = localStorage.getItem(storageKey);
       let savedTime = localStorage.getItem(timeKey);
 
       if (!savedFact || !savedTime || Date.now() - savedTime > updateInterval) {
           savedFact = getRandomFact(facts);
-          localStorage.setItem(storageKey, savedFact);
-          localStorage.setItem(timeKey, Date.now());
+          updateLocalStorage(savedFact);
       }
 
       if (factDisplay) {
-          factDisplay.textContent = savedFact;
+          factDisplay.classList.remove('visible'); // Скрываем старый факт
+          setTimeout(() => {
+              factDisplay.textContent = savedFact;
+              factDisplay.classList.add('visible'); // Плавно показываем новый факт
+          }, 500); // Ждем полсекунды, прежде чем показывать новый факт
       }
   }
 
   function updateFact(facts) {
       const newFact = getRandomFact(facts);
-      localStorage.setItem(storageKey, newFact);
-      localStorage.setItem(timeKey, Date.now());
+      updateLocalStorage(newFact);
+
       if (factDisplay) {
-          factDisplay.textContent = newFact;
+          factDisplay.classList.remove('visible'); // Скрываем старый факт
+          setTimeout(() => {
+              factDisplay.textContent = newFact;
+              factDisplay.classList.add('visible'); // Плавно показываем новый факт
+          }, 500); // Ждем полсекунды, прежде чем показывать новый факт
       }
   }
 
-  
   function fetchFacts() {
       fetch(jsonFile)
           .then(response => response.json())
@@ -104,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const recaptchaElement = quotePopupContainer.querySelector(".g-recaptcha");
         if (recaptchaElement) {
           grecaptcha.render(recaptchaElement, {
-            sitekey: "6LfdcsoqAAAAAIT0WYVhexoSxMGYHPh4ftY3-VOA"
+            sitekey: "6Lf6AeUqAAAAAEryUkwZ9GE4Tf0OBefqAHZJJn68"
           });
         }
         initForm('quoteForm-t', 'Thank you! Our team will review your request and get back to you soon.', 'Quote Request Received!');
