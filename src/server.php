@@ -1,51 +1,40 @@
 <?php
 
+$config = require_once __DIR__ . '/config.php';
+
+// Подключаем конфиг
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Конфигурация (лучше вынести в отдельный файл)
-const CONFIG = [
-    'emails' => [
-        'contact' => 'getinfo@ecoairlabs.com',
-        'quote' => 'quotes@ecoairlabs.com'
-    ],
-    'smtp' => [
-        'host' => 'localhost',
-        'username' => 'admin@ecoairlabs.com',
-        'password' => '',//'NSFd?B4?hOsX',
-        'port' => 25,
-        'encryption' => false //PHPMailer::ENCRYPTION_STARTTLS
-    ],
-    'recaptcha' => [
-        'secret' => '6Lf6AeUqAAAAAAcC-qWMYR8Lo83Hvk0bEyms-V84',
-        'verify_url' => 'https://www.google.com/recaptcha/api/siteverify'
-    ]
-];
 
 class MailService {
     private PHPMailer $mailer;
+    private array $config;
 
-    public function __construct() {
+    public function __construct(array $config) {
         $this->mailer = new PHPMailer(true);
+        $this->config = $config;
         $this->configureSMTP();
     }
 
     private function configureSMTP(): void {
         $this->mailer->isSMTP();
-        $this->mailer->Host = CONFIG['smtp']['host'];
+        $this->mailer->Host = $this->config['smtp']['host'];
         $this->mailer->SMTPAuth = false;
-        // $this->mailer->Username = CONFIG['smtp']['username'];
-        // $this->mailer->Password = CONFIG['smtp']['password'];
-        $this->mailer->SMTPSecure = false;//CONFIG['smtp']['encryption'];
-        $this->mailer->Port = CONFIG['smtp']['port'];
+        $this->mailer->Username = $this->config['smtp']['username'];
+        $this->mailer->Password = $this->config['smtp']['password'];
+        $this->mailer->SMTPSecure = $this->config['smtp']['encryption'];
+        $this->mailer->Port = $this->config['smtp']['port'];
     } 
+    
                          // 
     public function send(string $to, string $subject, string $body, string $replyToEmail, string $replyToName): bool {
         try {
             $this->mailer->clearAddresses();
-            $this->mailer->setFrom(CONFIG['smtp']['username'], 'Website Form');
+            $this->mailer->setFrom($this->config['smtp']['username'], 'Website Form');
             $this->mailer->addAddress($to);
             $this->mailer->addReplyTo($replyToEmail, $replyToName);
             
@@ -66,9 +55,9 @@ class MailService {
 }
 
 class RecaptchaVerifier {
-    public static function verify(string $response): bool {
+    public static function verify(string $response, array $config): bool {
         $data = [
-            'secret' => CONFIG['recaptcha']['secret'],
+            'secret' => $config['recaptcha']['secret'],
             'response' => $response
         ];
 
@@ -82,7 +71,7 @@ class RecaptchaVerifier {
         ];
 
         $context = stream_context_create($options);
-        $response = file_get_contents(CONFIG['recaptcha']['verify_url'], false, $context);
+        $response = file_get_contents($config['recaptcha']['verify_url'], false, $context);
         
         return $response ? json_decode($response)->success : false;
     }
@@ -91,10 +80,12 @@ class RecaptchaVerifier {
 class FormProcessor {
     private array $data;
     private string $formType;
+    private array $config;
 
-    public function __construct(array $postData) {
+    public function __construct(array $postData, array $config) {
         $this->formType = $postData['form_type'] ?? 'general_form';
         $this->data = $this->sanitizeInput($postData);
+        $this->config = $config;
     }
 
     private function sanitizeInput(array $input): array {
@@ -122,7 +113,7 @@ class FormProcessor {
         try {
             $this->validate();
             
-            $mailService = new MailService();
+            $mailService = new MailService($this->config);
             $emailConfig = $this->getEmailConfig();
             
             if ($mailService->send(
@@ -147,12 +138,12 @@ class FormProcessor {
         switch ($this->formType) {
             case 'contact_form':
                 return [
-                    'to' => CONFIG['emails']['contact'],
+                    'to' => $this->config['emails']['contact'],
                     'subject' => "New Contact Form Submission from {$this->data['full_name']}"
                 ];
             case 'quote_form':
                 return [
-                    'to' => CONFIG['emails']['quote'],
+                    'to' => $this->config['emails']['quote'],
                     'subject' => "New Quote Request from {$this->data['full_name']}"
                 ];
             default:
@@ -190,11 +181,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new RuntimeException('reCAPTCHA verification failed');
         }
 
-        if (!RecaptchaVerifier::verify($_POST['g-recaptcha-response'])) {
+        if (!RecaptchaVerifier::verify($_POST['g-recaptcha-response'], $config)) {
             throw new RuntimeException('Invalid reCAPTCHA');
         }
 
-        $processor = new FormProcessor($_POST);
+        $processor = new FormProcessor($_POST, $config);
         echo json_encode($processor->process());
         
     } catch (Exception $e) {

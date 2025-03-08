@@ -564,7 +564,7 @@ input:focus {
 }
 
 .header-area__logo-img {
-  min-width: 160px;
+  min-width: 120px;
   max-height: 70px;
   padding-inline-start: 0;
 }
@@ -837,7 +837,7 @@ input:focus {
 }
 @media only screen and (max-width: 767px) {
   .get-a-quote {
-    margin: 30px 15px !important;
+    margin: 30px 15px;
   }
 }
 
@@ -2993,6 +2993,18 @@ input:focus {
     min-width: 100px;
     
   }
+  .get-a-quote {
+    margin: 30px 5px;
+  }
+
+  .get-a-quote .uza-btn {
+    height: 40px;
+    line-height: 40px;
+    width: auto;
+    min-width: 80px;
+    padding: 0 10px;
+  }
+  
   .g-recaptcha {
     transform: scale(0.7);
     -webkit-transform: scale(0.7);
